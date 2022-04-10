@@ -19,9 +19,9 @@ class SemillasTest : DescribeSpec ({
         }
 
         it("verificar si da semillas") {
-            menta.daSemillas().shouldBeTrue()
-            mentita.daSemillas().shouldBeFalse()
-            soja.daSemillas().shouldBeFalse()
+            menta.daNuevasSemillas().shouldBeTrue()
+            mentita.daNuevasSemillas().shouldBeFalse()
+            soja.daNuevasSemillas().shouldBeFalse()
         }
 
         it("es fuerte") {
@@ -30,16 +30,16 @@ class SemillasTest : DescribeSpec ({
         }
 
         it("espacio") {
-            menta.espacio().shouldBe(2.0)
-            mentita.espacio().shouldBe(1.3)
-            soja.espacio().shouldBe(0.3)
+            menta.espacioOcupado().shouldBe(2.0)
+            mentita.espacioOcupado().shouldBe(1.3)
+            soja.espacioOcupado().shouldBe(0.3)
         }
 
         it("verifico la suma de varias") {
             val superficie = mutableListOf(
-                soja.espacio(),
-                menta.espacio(),
-                mentita.espacio()
+                soja.espacioOcupado(),
+                menta.espacioOcupado(),
+                mentita.espacioOcupado()
             ).sum()
             Math.ceil(superficie).shouldBe(4)
         }
