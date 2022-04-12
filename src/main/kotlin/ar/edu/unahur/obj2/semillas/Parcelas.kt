@@ -6,10 +6,10 @@ class Parcela(val largo: Double, val ancho: Double, val horasDeSol: Int) {
     var plantas: MutableList<Planta> = mutableListOf<Planta>()
 
     fun agregarPlanta(planta: Planta) {
-        if(this.cantidadMaximaPlantas() > plantas.size || planta.horasDeSolLimite() >= horasDeSol - 2) {
+        if(this.cantidadMaximaPlantas() > plantas.size && planta.horasDeSolLimite() >= horasDeSol - 2) {
             plantas.add(planta)
         } else {
-            error("Error al Plantar.")
+            throw Exception("Error al Plantar.")
         }
     }
 

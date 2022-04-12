@@ -2,13 +2,10 @@ package ar.edu.unahur.obj2.semillas
 
 
 fun main(){
-
+    println("Hola")
 }
 
 open class Menta(override var altura: Double, override val anioSemilla: Int): Planta(altura, anioSemilla) {
-    override fun horasDeSolLimite(): Int {
-        TODO("Not yet implemented")
-    }
 
     override fun daNuevasSemillas(): Boolean {
         return super.daNuevasSemillas() || altura > 0.4
