@@ -2,7 +2,7 @@ package ar.edu.unahur.obj2.semillas
 
 import kotlin.math.floor
 
-class Parcela(val largo: Double, val ancho: Double, val horasDeSol: Int) {
+open class Parcela(open val largo: Double, open val ancho: Double, open val horasDeSol: Int) {
     var plantas: MutableList<Planta> = mutableListOf<Planta>()
 
     fun agregarPlanta(planta: Planta) {
@@ -30,5 +30,18 @@ class Parcela(val largo: Double, val ancho: Double, val horasDeSol: Int) {
     fun tieneComplicaciones(): Boolean {
         val condicion : (Planta) -> Boolean = {it.horasDeSolLimite() < horasDeSol}
         return plantas.any(condicion)
+    }
+
+}
+
+class ParcelaEcologica(override val largo: Double, override val ancho: Double, override val horasDeSol: Int): Parcela (largo,ancho,horasDeSol){
+    fun seAsociaBien(planta: Planta):Boolean{
+        return this.tieneComplicaciones() and planta.esParcelaIdeal(this)
+    }
+}
+
+class ParcelaIndustrial(override val largo: Double, override val ancho: Double, override val horasDeSol: Int): Parcela (largo,ancho,horasDeSol){
+    fun seAsociaBien(planta: Planta):Boolean{
+        return (plantas.size <= 2) and planta.esFuerte()
     }
 }

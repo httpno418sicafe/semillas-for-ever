@@ -15,6 +15,9 @@ open class Menta(override var altura: Double, override val anioSemilla: Int): Pl
         return altura + 1
     }
 
+    override fun esParcelaIdeal(parcela: Parcela): Boolean {
+        return parcela.superficie() > 6
+    }
 }
 
 open class Soja(override var altura: Double, override val anioSemilla: Int): Planta(altura, anioSemilla) {
@@ -37,11 +40,19 @@ open class Soja(override var altura: Double, override val anioSemilla: Int): Pla
     override fun espacioOcupado(): Double {
         return altura/2
     }
+
+    override fun esParcelaIdeal(parcela: Parcela): Boolean {
+        return parcela.horasDeSol == this.horasDeSolLimite()
+    }
 }
 
 class SojaTransgenica(override var altura: Double, override val anioSemilla: Int): Soja(altura,anioSemilla){
     override fun daNuevasSemillas():Boolean{
         return false
+    }
+
+    override fun esParcelaIdeal(parcela: Parcela): Boolean {
+        return parcela.cantidadMaximaPlantas() == 1
     }
 }
 
@@ -63,7 +74,12 @@ class Quinoa(override var altura: Double, override val anioSemilla: Int, val esp
     }
 
     override fun espacioOcupado(): Double {
-        TODO("Not yet implemented")
+       return espacio
+    }
+
+    override fun esParcelaIdeal(parcela: Parcela): Boolean {
+        val condicion : (Planta) -> Boolean = {it.altura < 1.5}
+        return parcela.plantas.all(condicion)
     }
 
     override fun daNuevasSemillas(): Boolean {
@@ -89,4 +105,5 @@ abstract class Planta(open var altura: Double, open val anioSemilla: Int) {
         return this.esFuerte()
     }
     abstract fun espacioOcupado(): Double
+    abstract fun esParcelaIdeal(parcela: Parcela): Boolean
 }
