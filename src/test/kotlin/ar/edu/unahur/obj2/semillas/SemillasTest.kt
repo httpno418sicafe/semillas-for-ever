@@ -45,3 +45,52 @@ class SemillasTest : DescribeSpec ({
         }
     }
 })
+
+class VariantesSemillasTest : DescribeSpec ({
+    // hay una clase Planta que tiene por atributos
+    // anioSemilla, altura
+    describe("Creación de las plantas") {
+        val peperina = Peperina(1.0, 2021)
+        val quinoa = Quinoa(0.3, 2007, 0.1)
+        val quinoa2 = Quinoa(0.3, 2021, 0.5)
+        val sojaTransgenica = SojaTransgenica(0.6, 2009)
+
+        it("probamos los atributos altura, anioSemilla y espacio") {
+            peperina.altura.shouldBe(1.0)
+            peperina.anioSemilla.shouldBe(2021)
+            quinoa.espacioOcupado().shouldBe(0.1)
+            quinoa2.espacioOcupado().shouldBe(0.5)
+        }
+
+        it("verificar si da semillas") {
+            peperina.daNuevasSemillas().shouldBeTrue()
+            quinoa2.daNuevasSemillas().shouldBeFalse()
+            quinoa.daNuevasSemillas().shouldBeTrue()
+            sojaTransgenica.daNuevasSemillas().shouldBeFalse()
+        }
+
+        it("es fuerte") {
+            peperina.esFuerte().shouldBeFalse()
+            sojaTransgenica.esFuerte().shouldBeFalse()
+        }
+        it("horas de luz"){
+            quinoa2.horasDeSolLimite().shouldBe(0)
+            quinoa.horasDeSolLimite().shouldBe(10)
+        }
+
+        it("espacio") {
+            peperina.espacioOcupado().shouldBe(4.0)
+            quinoa.espacioOcupado().shouldBe(0.1)
+            sojaTransgenica.espacioOcupado().shouldBe(0.3)
+        }
+
+        it("verifico la suma de varias") {
+            val superficie = mutableListOf(
+                sojaTransgenica.espacioOcupado(),
+                peperina.espacioOcupado(),
+                peperina.espacioOcupado()
+            ).sum()
+            Math.ceil(superficie).shouldBe(9.0)
+        }
+    }
+})

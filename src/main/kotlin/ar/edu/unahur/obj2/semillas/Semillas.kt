@@ -1,10 +1,5 @@
 package ar.edu.unahur.obj2.semillas
 
-
-fun main(){
-    println("Hola")
-}
-
 open class Menta(override var altura: Double, override val anioSemilla: Int): Planta(altura, anioSemilla) {
 
     override fun daNuevasSemillas(): Boolean {
@@ -25,7 +20,7 @@ open class Soja(override var altura: Double, override val anioSemilla: Int): Pla
         var horasLimite: Int = 0
         horasLimite = when  {
             altura < 0.5 -> 6
-            altura in 0.5..1.0-> 8
+            altura in 0.5..1.0 -> 8
             else -> { // Note the block
                 12
             }
